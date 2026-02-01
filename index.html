@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔨</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IDEA CLONKER | Fork Ideas. Zero Excuses.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'JetBrains Mono', monospace;
+        background: #0a0a0a;
+        color: #e5e5e5;
+      }
+      
+      :root {
+        --acid: #c8ff00;
+        --acid-dim: #9acc00;
+        --charcoal: #0a0a0a;
+        --steel: #1a1a1a;
+        --rust: #ff6b35;
+        --warning: #ffd600;
+      }
+      
+      .font-space { font-family: 'Space Mono', monospace; }
+      
+      .noise-bg {
+        position: relative;
+      }
+      .noise-bg::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 1;
+      }
+      
+      .clonk-btn {
+        position: relative;
+        transition: all 0.1s ease;
+        box-shadow: 4px 4px 0 #c8ff00;
+      }
+      .clonk-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 #c8ff00;
+      }
+      .clonk-btn:active {
+        transform: translate(4px, 4px);
+        box-shadow: 0 0 0 #c8ff00;
+      }
+      
+      .card-industrial {
+        border: 2px solid #333;
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+        position: relative;
+      }
+      .card-industrial::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent 0%, #c8ff00 50%, transparent 100%);
+      }
+      
+      .scanline {
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(200, 255, 0, 0.02) 2px,
+          rgba(200, 255, 0, 0.02) 4px
+        );
+      }
+      
+      @keyframes glitch {
+        0%, 90%, 100% { transform: translate(0); }
+        92% { transform: translate(-2px, 1px); }
+        94% { transform: translate(2px, -1px); }
+        96% { transform: translate(-1px, 2px); }
+        98% { transform: translate(1px, -2px); }
+      }
+      
+      @keyframes stamp {
+        0% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(1.1) rotate(-2deg); }
+        100% { transform: scale(1) rotate(0deg); }
+      }
+      
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      @keyframes typeIn {
+        from { width: 0; }
+        to { width: 100%; }
+      }
+      
+      .animate-stamp {
+        animation: stamp 0.3s ease-out;
+      }
+      
+      .forked-badge {
+        background: #c8ff00;
+        color: #0a0a0a;
+        transform: rotate(-3deg);
+        box-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+      }
+      
+      .grid-pattern {
+        background-image: 
+          linear-gradient(rgba(200, 255, 0, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(200, 255, 0, 0.05) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      
+      .corner-mark::before {
+        content: '+';
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        color: #c8ff00;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .corner-mark::after {
+        content: '+';
+        position: absolute;
+        bottom: -8px;
+        right: -8px;
+        color: #c8ff00;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      
+      textarea:focus, input:focus {
+        outline: none;
+        border-color: #c8ff00 !important;
+        box-shadow: 0 0 0 1px #c8ff00, inset 0 0 20px rgba(200, 255, 0, 0.05);
+      }
+      
+      .idea-card {
+        transition: all 0.2s ease;
+      }
+      .idea-card:hover {
+        border-color: #c8ff00;
+        transform: translateX(4px);
+      }
+      
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1a1a1a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border: 1px solid #c8ff00;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
